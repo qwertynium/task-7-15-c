@@ -1,0 +1,90 @@
+package com.company;
+
+import java.util.Scanner;
+
+import static java.lang.System.out;
+
+public class Main {
+    public static void main(String[] args) {
+
+
+        out.println("test1 {1, 1, 1, 1, 1, 1, 1} answer:  " + raschetSrednego(test1()));
+        out.println("test2 {1,2,3,4,5,6,7} answer:  " + raschetSrednego(test2()));
+        out.println("test3 {0,0,0,0,0,0,0,0} answer:  "+ raschetSrednego(test3()));
+        out.println("test4 {1,1,1,1,1,1,2} answer: "+ raschetSrednego(test4()));
+
+        int[ ] myArray = VvediteZnacheniaVMaciv();
+        out.println(raschetSrednego(myArray));
+
+    }
+
+    public static int[ ] VvediteZnacheniaVMaciv() {
+        int[] a;
+        int n = 0;
+        int vvodimieChislaPolzovatelem = 0;
+        Scanner scanner = new Scanner(System.in);
+
+        out.println("Enter the amount of space in the array");
+        n = scanner.nextInt();
+        a = new int[n];
+        out.println("If you want to enter numbers manually, write 1. If automatically 2");
+        int avto = scanner.nextInt();
+        if (avto == 1) {
+            for(int i = 0; i < n; i++){
+                vvodimieChislaPolzovatelem = scanner.nextInt();
+                a[i] = vvodimieChislaPolzovatelem;
+
+            }
+        } else if (avto == 2) {
+            for (int i = 0; i < n; i++) {
+
+                a[i] = ((int) ( Math.random() * 10000 + 0 ));
+                out.println(a[i]);
+
+            }
+
+        }
+        else {
+            out.print("Number entered incorrectly. Try again.");
+        }return a;
+    }
+    public static int raschetSrednego(int [ ] myArray){
+        int sum = 0;
+
+        for (int a : myArray) {
+
+            sum += a;
+        }
+
+        int size = myArray.length;
+        int sredneeZnachene = sum / size;
+        int colichestvoOdinacovChisel = 1;
+        int schetBolcheSrednego = 0;
+
+        for (int i = 0; i < size - 1; i++) {
+
+            if (myArray[i] >= sredneeZnachene) {
+                    schetBolcheSrednego++;
+                    if (sredneeZnachene == myArray[i]) {
+                        colichestvoOdinacovChisel++;
+                    }
+                }
+            }
+            if (colichestvoOdinacovChisel == size) {
+                schetBolcheSrednego = 0;
+            }
+            return schetBolcheSrednego;
+        }
+      public static int[ ] test1() {
+          return new int[]{1, 1, 1, 1, 1, 1, 1};
+      }
+      public static int[ ] test2() {
+          return new int[]{1,2,3,4,5,6,7};
+    }
+    public static int[ ] test3() {
+        return new int[]{0,0,0,0,0,0,0,0};
+    }
+    public static int[ ] test4() {
+        return new int[]{1,1,1,1,1,1,2};
+    }
+}
